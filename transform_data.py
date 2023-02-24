@@ -32,15 +32,13 @@ def _add_idx_column(df: pd.DataFrame, col_name_from: str, col_name_to: str, mp: 
 
 
 logger.info("start reading dataframes")
-articles_original = pd.read_csv(INPUT_DIR / 'articles.csv', dtype=schema.ARTICLES_ORIGINAL)
-customers_original = pd.read_csv(INPUT_DIR / 'customers.csv', dtype=schema.CUSTOMERS_ORIGINAL)
-transactions_original = pd.read_csv(
-    INPUT_DIR / 'transactions_train.csv',
-    dtype=schema.TRANSACTIONS_ORIGINAL,
-    parse_dates=['t_dat']
+articles_original = pd.read_parquet(INPUT_DIR / 'articles.parquet')
+customers_original = pd.read_parquet(INPUT_DIR / 'customers.parquet')
+transactions_original = pd.read_parquet(
+    INPUT_DIR / 'transactions_train.parquet',
 )
 
-for sample_repr, sample in [("01", 0.001), ("1", 0.01), ("10", 0.1), ("100", 1)]:
+for sample_repr, sample in [("100", 1)]:
     output_dir = Path(f"./input/{sample_repr}")
     (output_dir / 'images').mkdir(exist_ok=True, parents=True)
 

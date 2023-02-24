@@ -29,7 +29,7 @@ def _load_resources(model_type: str, dataset: str, week: int, dim: int):
     return model, user_features, item_features
 
 
-def calc_embeddings(model_type: str, dataset: str, week: int, dim: int) -> tuple[pd.DataFrame, pd.DataFrame]:
+def calc_embeddings(model_type: str, dataset: str, week: int, dim: int):
     model, user_features, item_features = _load_resources(model_type, dataset, week, dim)
 
     biases, embeddings = model.get_user_representations(user_features)
